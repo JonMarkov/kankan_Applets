@@ -1,5 +1,5 @@
 <!-- STAR  视频 STAR -->
-<video class='video_box' src="https://static.yximgs.com/s1/videos/home-2.mp4" autoplay="{{ture}}" controls="{{false}}" show-fullscreen-btn="{{false}}" show-play-btn="{{false}}" objectFit="fill" show-center-play-btn="{{false}}"></video>
+<video class='video_box' autoplay controls="{{false}}" show-fullscreen-btn="{{false}}" show-play-btn="{{false}}" objectFit="fill" show-center-play-btn="{{false}}" src="https://static.yximgs.com/s1/videos/home-2.mp4" />
 <!-- STAR 看看LOGO部分 -->
 <view class='logo_box'>
   <image src='../../static/image/kankan@3x.png'></image>
@@ -47,8 +47,26 @@
   </view>
   <!-- 微剧续集列表 -->
   <view class='version_sequel'>
-    这里是续集选择部分，需要在这里遍历所有续集的点击按钮
+    <scroll-view scroll-x="true" class='version_sequel_roll'>
+      <view class='version_sequel_num'>1</view>
+      <view class='version_sequel_num'>2</view>
+      <view class='version_sequel_num'>3</view>
+      <view class='version_sequel_num'>4</view>
+      <view class='version_sequel_num'>5</view>
+      <view class='version_sequel_num'>6</view>
+      <view class='version_sequel_num'>7</view>
+      <view class='version_sequel_num'>8</view>
+      <view class='version_sequel_num'>9</view>
+      <view class='version_sequel_num'>10</view>
+      <view class='version_sequel_num'>11</view>
+      <view class='version_sequel_num'>12</view>
+    </scroll-view>
   </view>
+</view>
+<!-- STAR 进度条 STAR-->
+<view class='bar_box'>
+  <view class='bar_cache' style='width:100%'></view>
+  <view class='bar_play' style='width:50%'></view>
 </view>
 <!-- STAR 回复客服部分 STAR -->
 <view class='customer'>
