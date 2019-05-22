@@ -1,0 +1,169 @@
+/* 视频样式 */
+
+.video_box {
+  position: fixed;
+  height: 90%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /*垂直居中*/
+  justify-content: center; /*水平居中*/
+  z-index: -1;
+}
+
+/* logo部分 */
+
+.logo_box {
+  z-index: 0;
+  padding: 20rpx;
+}
+
+.logo_box image {
+  width: 162rpx;
+  height: 41rpx;
+}
+
+/* 播放按钮 */
+
+.triangle_border_right {
+  border-radius: 10rpx;
+  position: absolute;
+  top: 40%;
+  left: 48%;
+  width: 0;
+  height: 0;
+  border-width: 40px 0 40px 60px;
+  border-style: solid;
+  opacity: 0.3;
+  border-color: transparent transparent transparent #fff; /*透明 透明 透明 灰*/
+}
+
+/* 视频文本内容区域 */
+
+.version_box {
+  flex-direction: column;
+  z-index: 1;
+  position: absolute;
+  bottom: 10%;
+  color: #fff;
+  display: flex;
+}
+
+/* 微剧信息部分 */
+
+.version_content {
+  width: 94%;
+  padding: 3%;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+}
+
+/* 微剧标题部分 */
+
+.version_content_left_title text {
+  font-size: 36rpx;
+  color: #fff;
+  line-height: 36rpx;
+}
+
+/* 微剧作者昵称部分 */
+
+.version_content_left_name text {
+  font-size: 32rpx;
+  color: #fff;
+  line-height: 40rpx;
+}
+
+/* 微剧剧集介绍部分 */
+
+.version_content_left_detail text {
+  font-size: 32rpx;
+  color: #fff;
+  line-height: 40rpx;
+}
+
+/* 微剧观看次数 */
+
+.watch_box {
+  display: flex;
+  flex-direction: column;
+  font-size: 24rpx;
+  color: #fff;
+  line-height: 30rpx;
+  justify-content: center;
+  align-items: center;
+}
+
+.watch_box image {
+  width: 80rpx;
+  height: 80rpx;
+}
+
+/* 微剧点赞次数 */
+
+.like_box {
+  display: flex;
+  flex-direction: column;
+  font-size: 24rpx;
+  color: #fff;
+  line-height: 30rpx;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20rpx;
+}
+
+.like_box image {
+  width: 80rpx;
+  height: 80rpx;
+}
+
+/* 微剧作者头像 */
+
+.headimg_box {
+  display: flex;
+  flex-direction: column;
+  font-size: 24rpx;
+  color: #fff;
+  line-height: 30rpx;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20rpx;
+}
+
+.headimg_box image {
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 50%;
+}
+
+/* 微剧续集选择部分 */
+
+.version_sequel {
+  width: 100%;
+  padding-left: 3%;
+}
+
+/* 底部客服部分 */
+
+.customer {
+  position: absolute;
+  bottom: 0px;
+  background: #181818;
+  height: 10%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.customer text {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff0d2), color-stop(100%, #ffd37a));
+  background: -webkit-linear-gradient(top, #fff0d2 0%, #ffd37a 100%);
+  background: -o-linear-gradient(top, #fff0d2 0%, #ffd37a 100%);
+  background: -ms-linear-gradient(top, #fff0d2 0%, #ffd37a 100%);
+  padding: 10rpx 50rpx;
+  border-radius: 30rpx;
+  font-size: 32rpx;
+  color: rgba(24, 24, 24, 1);
+}

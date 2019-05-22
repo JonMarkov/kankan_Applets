@@ -1,0 +1,56 @@
+<!-- STAR  视频 STAR -->
+<video class='video_box' src="https://static.yximgs.com/s1/videos/home-2.mp4" autoplay="{{ture}}" controls="{{false}}" show-fullscreen-btn="{{false}}" show-play-btn="{{false}}" objectFit="fill" show-center-play-btn="{{false}}"></video>
+<!-- STAR 看看LOGO部分 -->
+<view class='logo_box'>
+  <image src='../../static/image/kankan@3x.png'></image>
+</view>
+<!-- STAR 播放按钮 STAR -->
+<view class='triangle_border_right'></view>
+<!-- STAR 视频文本内容区域 STAR -->
+<view class='version_box'>
+  <!-- 微剧的内容区域 -->
+  <view class='version_content'>
+    <!-- 微剧内容区域的左侧（广告，作者，标题，视频详细） -->
+    <view class='version_content_left'>
+      <!-- 广告部分 -->
+      <view class='version_content_left_commodity'>广告部分 暂时留白广告部分 暂时留白广告部分 暂时留白广告部分 暂时留白</view>
+      <!-- 微剧的标题 -->
+      <view class='version_content_left_title'>
+        <text>@我们的时代</text>
+      </view>
+      <!-- 微剧的作者昵称 -->
+      <view class='version_content_left_name'>
+        <text>这里应该是作者昵称</text>
+      </view>
+      <!-- 微剧的剧集介绍 -->
+      <view class='version_content_left_detail'>
+        <text>这里应该是剧集介绍部分</text>
+      </view>
+    </view>
+    <!-- 文本内容区域的右侧（观看，点赞，作者头像） -->
+    <view class='version_content_right'>
+      <!-- 观看次数 -->
+      <view class='watch_box'>
+        <image src='../../static/image/watch@3x.png'></image>
+        <text>123.5W</text>
+      </view>
+      <!-- 点赞次数 -->
+      <view class='like_box'>
+        <image src='../../static/image/like@3x.png'></image>
+        <text>5.4W</text>
+      </view>
+      <!-- 作者头像 -->
+      <view class='headimg_box'>
+        <image src='../../static/image/head_img.jpg'></image>
+      </view>
+    </view>
+  </view>
+  <!-- 微剧续集列表 -->
+  <view class='version_sequel'>
+    这里是续集选择部分，需要在这里遍历所有续集的点击按钮
+  </view>
+</view>
+<!-- STAR 回复客服部分 STAR -->
+<view class='customer'>
+  <text>回复 666 看更多</text>
+</view>
