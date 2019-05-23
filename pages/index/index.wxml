@@ -13,7 +13,12 @@
     <!-- 微剧内容区域的左侧（广告，作者，标题，视频详细） -->
     <view class='version_content_left'>
       <!-- 广告部分 -->
-      <view class='version_content_left_commodity'>广告部分 暂时留白广告部分 暂时留白广告部分 暂时留白广告部分 暂时留白</view>
+      <view class='version_content_left_commodity'>
+        <view class='version_content_left_commodity_icon'>
+          <image src='../../static/image/kankan@3x.png'></image>
+        </view>
+        <view class='version_content_left_commodity_text'>视频同款 精华素</view>
+      </view>
       <!-- 微剧的标题 -->
       <view class='version_content_left_title'>
         <text>@我们的时代</text>

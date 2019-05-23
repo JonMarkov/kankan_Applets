@@ -1,6 +1,8 @@
 {
   "pages": [
+        "pages/videoList/videoList",
     "pages/index/index"
+
   ],
   "window": {
     "backgroundTextStyle": "light",
