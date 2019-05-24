@@ -1,4 +1,5 @@
 // pages/index/index.js
+var app = getApp();
 Page({
 
   /**
@@ -6,16 +7,22 @@ Page({
    */
   data: {
     // 视频地址
-    video_address: ''
+    video_address: '',
+    statusBarHeight:app.globalData.statusBarHeight
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    console.log(app.globalData.statusBarHeight)
   },
-
+  // 跳转列表页面
+  jumpVideoList(){
+    wx.navigateTo({
+      url: '/pages/videoList/videoList',
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

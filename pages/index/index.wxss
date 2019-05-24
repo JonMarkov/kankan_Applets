@@ -1,3 +1,17 @@
+/* 自定义状态栏部分 */
+.custom{
+  display: flex;
+  align-items: center
+
+}
+.custom image {
+  width: 80rpx;
+  height: 80rpx;
+  margin: 10rpx
+}
+.custom text{
+  margin: 20%
+}
 /* 视频样式 */
 
 .video_box {
@@ -6,8 +20,8 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center; 
-  justify-content: center; 
+  align-items: center;
+  justify-content: center;
   z-index: -1;
 }
 

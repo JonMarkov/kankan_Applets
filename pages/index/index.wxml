@@ -1,3 +1,10 @@
+
+<!-- STAR 自定义状态栏部分 STAR -->
+<view class="custom flex_center" style="margin-top:{{statusBarHeight}}px">
+  <image src='../../static/image/menu_icon.png' bindtap='jumpVideoList'></image>
+  <text>看看视频</text>
+</view>
+<view class="empty_custom" style="margin-top:{{statusBarHeight}}px"></view>
 <!-- STAR  视频 STAR -->
 <video class='video_box' autoplay controls="{{false}}" show-fullscreen-btn="{{false}}" show-play-btn="{{false}}" objectFit="fill" show-center-play-btn="{{false}}" src="https://static.yximgs.com/s1/videos/home-2.mp4" />
 <!-- STAR 看看LOGO部分 -->
