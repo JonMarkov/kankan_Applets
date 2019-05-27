@@ -1,18 +1,18 @@
-
 <!-- STAR 自定义状态栏部分 STAR -->
 <view class="custom flex_center" style="margin-top:{{statusBarHeight}}px">
-  <image src='../../static/image/menu_icon.png' bindtap='jumpVideoList'></image>
+  <image src='../../static/image/menu_icon.png' bindtap='JumpVideoList'></image>
   <text>看看视频</text>
 </view>
 <view class="empty_custom" style="margin-top:{{statusBarHeight}}px"></view>
-<!-- STAR  视频 STAR -->
-<video class='video_box' autoplay controls="{{false}}" show-fullscreen-btn="{{false}}" show-play-btn="{{false}}" objectFit="fill" show-center-play-btn="{{false}}" src="https://static.yximgs.com/s1/videos/home-2.mp4" />
+<!-- STAR  视频 STAR autoplay -->
+<video class='video_box' id='videoNode' controls="{{false}}" show-fullscreen-btn="{{false}}" show-play-btn="{{false}}" objectFit="fill" show-center-play-btn="{{false}}" src="{{videoAddress}}" bindplay='bindplay' bindpause='bindpause' bindended='bindend'
+  bindtimeupdate="bindtimeupdate" />
 <!-- STAR 看看LOGO部分 -->
 <view class='logo_box'>
   <image src='../../static/image/kankan@3x.png'></image>
 </view>
 <!-- STAR 播放按钮 STAR -->
-<view class='triangle_border_right'></view>
+<view class='triangle_border_right' bindtap="videoPlay"></view>
 <!-- STAR 视频文本内容区域 STAR -->
 <view class='version_box'>
   <!-- 微剧的内容区域 -->
@@ -22,21 +22,21 @@
       <!-- 广告部分 -->
       <view class='version_content_left_commodity'>
         <view class='version_content_left_commodity_icon'>
-          <image src='../../static/image/kankan@3x.png'></image>
+          <image src='../../static/image/shop_cat.png'></image>
         </view>
-        <view class='version_content_left_commodity_text'>视频同款 精华素</view>
+        <view class='version_content_left_commodity_text'>{{goodsName}}</view>
       </view>
       <!-- 微剧的标题 -->
       <view class='version_content_left_title'>
-        <text>@我们的时代</text>
+        <text>{{Name}}</text>
       </view>
       <!-- 微剧的作者昵称 -->
       <view class='version_content_left_name'>
-        <text>这里应该是作者昵称</text>
+        <text>@{{nickName}}</text>
       </view>
       <!-- 微剧的剧集介绍 -->
       <view class='version_content_left_detail'>
-        <text>这里应该是剧集介绍部分</text>
+        <text>{{des}}</text>
       </view>
     </view>
     <!-- 文本内容区域的右侧（观看，点赞，作者头像） -->
@@ -44,41 +44,30 @@
       <!-- 观看次数 -->
       <view class='watch_box'>
         <image src='../../static/image/watch@3x.png'></image>
-        <text>123.5W</text>
+        <text>{{playCount}}</text>
       </view>
       <!-- 点赞次数 -->
       <view class='like_box'>
         <image src='../../static/image/like@3x.png'></image>
-        <text>5.4W</text>
+        <text>{{likeCount}}</text>
       </view>
       <!-- 作者头像 -->
       <view class='headimg_box'>
-        <image src='../../static/image/head_img.jpg'></image>
+        <image src='{{headPic}}'></image>
       </view>
     </view>
   </view>
   <!-- 微剧续集列表 -->
   <view class='version_sequel'>
     <scroll-view scroll-x="true" class='version_sequel_roll'>
-      <view class='version_sequel_num'>1</view>
-      <view class='version_sequel_num'>2</view>
-      <view class='version_sequel_num'>3</view>
-      <view class='version_sequel_num'>4</view>
-      <view class='version_sequel_num'>5</view>
-      <view class='version_sequel_num'>6</view>
-      <view class='version_sequel_num'>7</view>
-      <view class='version_sequel_num'>8</view>
-      <view class='version_sequel_num'>9</view>
-      <view class='version_sequel_num'>10</view>
-      <view class='version_sequel_num'>11</view>
-      <view class='version_sequel_num'>12</view>
+      <view wx:for="{{sequelList}}" class="version_sequel_num {{setNum ==item.sequel?'pitch_sequel':''}}" data-pitch_sequel='{{item.sequel_id}}' bindtap='PitchSequel'>{{item.sequel}}</view>
     </scroll-view>
   </view>
 </view>
 <!-- STAR 进度条 STAR-->
 <view class='bar_box'>
-  <view class='bar_cache' style='width:100%'></view>
-  <view class='bar_play' style='width:50%'></view>
+  <view class='bar_cache' style='width:{{video_cache}}%'></view>
+  <view class='bar_play' style='width:{{video_play}}%'></view>
 </view>
 <!-- STAR 回复客服部分 STAR -->
 <view class='customer'>

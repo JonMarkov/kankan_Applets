@@ -44,7 +44,7 @@ Page({
         // 如果授权过且未超过一天则直接跳转
         if (grant && timeTF) {
           wx.reLaunch({
-            url: '/pages/home/home',
+            url: '/pages/index/index',
           });
         }
       }
@@ -118,7 +118,7 @@ Page({
 
                   }
                   wx.reLaunch({
-                    url: '/pages/home/home?Lo=' + Lo,
+                    url: '/pages/index/index',
                   });
                 }
               })

@@ -1,17 +1,20 @@
 /* 自定义状态栏部分 */
-.custom{
-  display: flex;
-  align-items: center
 
+.custom {
+  display: flex;
+  align-items: center;
 }
+
 .custom image {
   width: 80rpx;
   height: 80rpx;
-  margin: 10rpx
+  margin: 10rpx;
 }
-.custom text{
-  margin: 20%
+
+.custom text {
+  margin: 20%;
 }
+
 /* 视频样式 */
 
 .video_box {
@@ -82,13 +85,20 @@
 .version_content_left_commodity {
   display: flex;
   flex-direction: row;
-  /* justify-content: center; */
   align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10rpx;
+}
+
+.version_content_left_commodity_icon {
+  width: 50rpx;
+  height: 50rpx;
 }
 
 .version_content_left_commodity_icon image {
-  width: 32rpx;
-  height: 30rpx;
+  width: 50rpx;
+  height: 50rpx;
 }
 
 .version_content_left_commodity_text {
@@ -192,15 +202,18 @@
 }
 
 .version_sequel_num {
-  background: #000;
+  background: rgba(0, 0, 0, 0.5);
   padding: 15rpx 30rpx;
   border-radius: 10rpx;
   margin-left: 3%;
   display: inline-block;
   color: #fff;
   opacity: 0.8;
+  font-size: 24rpx
 }
-
+.pitch_sequel{
+  background: rgba(255, 0, 0, 1)
+}
 /* 播放和缓存的进度提 */
 
 .bar_cache {
@@ -208,7 +221,7 @@
   position: fixed;
   bottom: 10%;
   z-index: 100;
-  height: 1rpx;
+  height: 2rpx;
 }
 
 .bar_play {
@@ -216,7 +229,7 @@
   position: fixed;
   bottom: 10%;
   z-index: 101;
-  height: 1rpx;
+  height: 2rpx;
 }
 
 /* 底部客服部分 */
