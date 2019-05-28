@@ -11,8 +11,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    // 视频地址
-    video_address: '',
     // 自定义标题栏的高度
     statusBarHeight: AppUrl.globalData.statusBarHeight,
     // 微剧ID
@@ -42,7 +40,11 @@ Page({
     // 缓存进度
     video_cache: '0',
     // 播放进度
-    video_play: '0'
+    video_play: '0',
+    // 播放按钮的状态
+    suspend_state: 'display:block',
+    // 播放结束按钮的状态
+    finish_state: 'display:none',
   },
 
   /**
@@ -229,35 +231,56 @@ Page({
   DelHtmlTag(str) {
     return str.replace(/<[^>]+>/g, "");
   },
-  // 函数定义 获取视频信息（此处为请求接口）-----未完成
+  // 函数定义 获取视频信息（此处为请求接口）--------------------------------------未完成
   VideoInfoList() {
+    // 请求接口 请求接口 请求接口 请求接口 请求接口 请求接口
     console.log(this.data.videoAddress)
-  },
-  // 函数定义 操作获取到的视频信息
-  VideoInfo() {
-
   },
   // 函数定义 视频播放PLAY 暂时 需修改
   videoPlay() {
-    console.log('开始播放')
+    let _this = this
+    // 创建video实例
     var videoplay = wx.createVideoContext('videoNode')
+    // 使视频播放
     videoplay.play()
-    this.bindtimeupdate()
+    // 设置播放按钮不再显示
+    _this.setData({
+      suspend_state: 'display:none',
+      finish_state: 'display:none'
+    })
+    // 函数执行 播放中函数，查看当前播放时间和比例 进度条
+    _this.bindtimeupdate()
   },
-  // bindplay: function () {//开始播放按钮或者继续播放函数
-  //   console.log("开始播放")
-  // },
-  // bindpause: function () {//暂停播放按钮函数
-  //   console.log("停止播放")
-  // },
-  // bindend: function () {//播放结束按钮函数
-  //   console.log("播放结束")
-  // },
-  //播放中函数，查看当前播放时间等--暂时，需修改
+  // 函数定义  暂停播放
+  videoPause() {
+    let _this = this
+    // 创建video实例
+    var videoplay = wx.createVideoContext('videoNode')
+    // 使视频暂停
+    videoplay.pause()
+    _this.setData({
+      suspend_state: 'display:block',
+    })
+  },
+  // 函数定义 播放结束
+  bindend: function() {
+    let _this = this
+    _this.setData({
+      finish_state: 'display:block'
+    })
+  },
+  //函数定义 播放中函数，查看当前播放时间和比例 进度条
   bindtimeupdate: function(res) {
+    var _this = this
+    // 当前视频播放时间
     let videoPlay = res.detail.currentTime
+    // 视频总时长
+    let inner_time = res.detail.duration
+    // 当前播放占全部时长的比例
+    let video_ratio = (videoPlay/inner_time)*100
     this.setData({
-      video_play: videoPlay
+      video_play: video_ratio,
+      video_cache: "100"
     })
   },
   /**
@@ -267,11 +290,6 @@ Page({
     let _this = this;
     // 函数执行 获取视频信息（此处为请求接口）
     _this.VideoInfoList()
-    // 100毫秒之后执行函数（目的是获取到视频地址之后执行）
-    var timeOut = setTimeout(function() {
-      // 函数执行 视频信息（获取到视频之后操作）
-      _this.VideoInfo()
-    }, 100)
   },
 
   /**

@@ -5,14 +5,18 @@
 </view>
 <view class="empty_custom" style="margin-top:{{statusBarHeight}}px"></view>
 <!-- STAR  视频 STAR autoplay -->
-<video class='video_box' id='videoNode' controls="{{false}}" show-fullscreen-btn="{{false}}" show-play-btn="{{false}}" objectFit="fill" show-center-play-btn="{{false}}" src="{{videoAddress}}" bindplay='bindplay' bindpause='bindpause' bindended='bindend'
-  bindtimeupdate="bindtimeupdate" />
+<video class='video_box' id='videoNode' controls="{{false}}" show-fullscreen-btn="{{false}}" show-play-btn="{{false}}" objectFit="fill" show-center-play-btn="{{false}}" src="{{videoAddress}}" bindended='bindend' bindtimeupdate="bindtimeupdate" bindtap='videoPause'/>
 <!-- STAR 看看LOGO部分 -->
 <view class='logo_box'>
   <image src='../../static/image/kankan@3x.png'></image>
 </view>
 <!-- STAR 播放按钮 STAR -->
-<view class='triangle_border_right' bindtap="videoPlay"></view>
+<view class='triangle_border_right'>
+  <!-- 播放按钮 -->
+  <image src='../../static/image/suspend@3x.png'  bindtap="videoPlay" style='{{suspend_state}}'></image>
+  <!-- 重播按钮 -->
+  <image src='../../static/image/finish@3x.png'  bindtap="videoPlay" style='{{finish_state}}'></image>
+</view>
 <!-- STAR 视频文本内容区域 STAR -->
 <view class='version_box'>
   <!-- 微剧的内容区域 -->

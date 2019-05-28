@@ -45,16 +45,13 @@
 .triangle_border_right {
   border-radius: 10rpx;
   position: absolute;
-  top: 40%;
+  top: 50%;
   left: 48%;
-  width: 0;
-  height: 0;
-  border-width: 40px 0 40px 60px;
-  border-style: solid;
-  opacity: 0.3;
-  border-color: transparent transparent transparent #fff; /*透明 透明 透明 白*/
 }
-
+.triangle_border_right image{
+width: 100rpx;
+height: 100rpx
+}
 /* 视频文本内容区域 */
 
 .version_box {
