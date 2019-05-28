@@ -1,10 +1,12 @@
 var AppUrl = getApp();
 // 声明定义接口地址 通过微剧ID获取剧集信息（微剧播放页面）
-var miniProUrl_2 = AppUrl.globalData.WX_microvision + getApp().globalData.wx_url_2
+var miniProUrl_2 = AppUrl.globalData.WX_microvision + getApp().globalData.wx_url_2;
 // 声明定义接口地址 通过微剧id获取微剧信息
-var miniProUrl_3 = AppUrl.globalData.WX_microvision + getApp().globalData.wx_url_3
+var miniProUrl_3 = AppUrl.globalData.WX_microvision + getApp().globalData.wx_url_3;
 // 声明定义接口地址 通过微剧id获取微剧信息（标题）
-var miniProUrl_4 = AppUrl.globalData.WX_microvision + getApp().globalData.wx_url_4
+var miniProUrl_4 = AppUrl.globalData.WX_microvision + getApp().globalData.wx_url_4;
+// 声明定义接口地址 通过GCID获取视频的URL播放地址
+var GcidUrl = "http://mp4.cl.kankan.com/getCdnresource_flv"
 Page({
 
   /**
@@ -16,7 +18,7 @@ Page({
     // 微剧ID
     movieId: '47',
     // 微剧子集ID
-    setId: '66',
+    setId: '65',
     // 续集列表
     sequelList: [],
     // 观看数
@@ -36,7 +38,7 @@ Page({
     // 微剧标题
     Name: '',
     // 视频地址
-    videoAddress: 'https://static.yximgs.com/s1/videos/home-2.mp4',
+    videoAddress: '',
     // 缓存进度
     video_cache: '0',
     // 播放进度
@@ -52,6 +54,7 @@ Page({
    */
   onLoad: function(options) {
     var _this = this
+    // 这里要获取从上个页面传来的微剧ID和子集id
     // 100毫秒之后执行函数（目的是等待续集ID存入data之后执行）
     var timeOut = setTimeout(function() {
       // 函数执行 通过微剧ID获取剧集信息（微剧播放页面）
@@ -141,6 +144,8 @@ Page({
           moviesSetScreenList: moviesSetScreenList,
           setNum: setNum
         })
+        // 函数执行 获取视频信息（使用GCID获取url地址）
+        _this.GcidVideoInfoList(moviesSetScreenList)
       }
     })
   },
@@ -215,7 +220,11 @@ Page({
     let setId = e.currentTarget.dataset.pitch_sequel
     // 存入本地data中
     _this.setData({
-      setId: setId
+      setId: setId,
+      // 播放按钮的状态
+      suspend_state: 'display:block',
+      // 播放结束按钮的状态
+      finish_state: 'display:none',
     });
     // 100毫秒之后执行函数（目的是等待续集ID存入data之后执行）
     var timeOut = setTimeout(function() {
@@ -231,10 +240,52 @@ Page({
   DelHtmlTag(str) {
     return str.replace(/<[^>]+>/g, "");
   },
-  // 函数定义 获取视频信息（此处为请求接口）--------------------------------------未完成
-  VideoInfoList() {
-    // 请求接口 请求接口 请求接口 请求接口 请求接口 请求接口
-    console.log(this.data.videoAddress)
+  // 函数定义 获取视频信息（此处为请求接口
+  GcidVideoInfoList(res) {
+    var _this = this
+    let GCID = res;
+    let params = {
+      gcid: GCID,
+      bid: 21
+    }
+    const newparams = Object.assign(params);
+    wx.request({
+      url: GcidUrl,
+      data: newparams,
+      method: "GET",
+      header: {
+        'content-type': 'application/josn'
+      },
+      success: res => {
+        console.log(res.data)
+        let resData = res.data
+        // 查找"["开始位索引
+        let star_indexes = resData.indexOf("[")
+        // 查找"]"结束位索引
+        let end_indexes = resData.indexOf("]")
+        // 获取"[]"中的内容
+        let resnum = resData.substring(star_indexes, end_indexes)
+        // 获取IP地址的正则表达式
+        var ip = /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/;
+        // MP4的Ip地址
+        var Iptext = ip.exec(resnum)[0];
+        // MP4的端口号
+        var port = "8080"
+        // URL路径开始位索引
+        let star_url = resnum.indexOf("/")
+        // URL路径结束位索引
+        let end_url = resnum.indexOf("mp4")
+        // MP4的Url路径内容
+        let url_resnum = resnum.substring(star_url, end_url + 3)
+        // MP4完整地址
+        let video_address = "http://" + Iptext + url_resnum
+        console.log(video_address)
+        // 把视频地址放入data中
+        _this.setData({
+          videoAddress: video_address
+        })
+      }
+    })
   },
   // 函数定义 视频播放PLAY 暂时 需修改
   videoPlay() {
@@ -277,20 +328,17 @@ Page({
     // 视频总时长
     let inner_time = res.detail.duration
     // 当前播放占全部时长的比例
-    let video_ratio = (videoPlay/inner_time)*100
+    let video_ratio = (videoPlay / inner_time) * 100
     this.setData({
       video_play: video_ratio,
       video_cache: "100"
     })
   },
+  // 函数定义 用GCID请求视频
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
-    let _this = this;
-    // 函数执行 获取视频信息（此处为请求接口）
-    _this.VideoInfoList()
-  },
+  onReady: function() {},
 
   /**
    * 生命周期函数--监听页面显示
