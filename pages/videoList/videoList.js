@@ -80,7 +80,7 @@ Page({
       key: "movieId",
       data: id
     })
-    wx.navigateTo({
+    wx.reLaunch({
       url: '/pages/index/index',
     })
   },

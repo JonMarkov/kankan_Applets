@@ -16,9 +16,9 @@ Page({
     // 自定义标题栏的高度
     statusBarHeight: AppUrl.globalData.statusBarHeight,
     // 微剧ID
-    movieId: '',
+    movieId: '133',
     // 微剧子集ID
-    setId: '',
+    setId: '1838',
     // 续集列表
     sequelList: [],
     // 观看数
@@ -65,14 +65,6 @@ Page({
         setId: set_Id
       })
     }
-  },
-  ma(movieId, setId) {
-    let _this = this
-    // 把微剧id和子集id放入data
-    _this.setData({
-      movieId: movieId,
-      setId: setId
-    })
   },
   // 函数定义 跳转视频列表页面
   JumpVideoList() {
