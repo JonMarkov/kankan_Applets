@@ -31,14 +31,14 @@
 </view>
 <!-- 列表内容部分 -->
 <view class='list_content'>
-  <view class='list_content_box'>
+  <view class='list_content_box' wx:for="{{micro_list}}" data-id='{{item.micro_id}}' bindtap='Microplay' wx:key='{{item.micro_id}}'>
     <!-- 微剧封面图 -->
     <view class='list_content_box_img'>
-      <image src='../../static/image/11.png'></image>
+      <image src='{{item.micro_screens_hot_url}}'></image>
     </view>
     <!-- 微剧标题和完结状态 -->
     <view class='list_content_box_text'>
-      <text class='text_title'>我们的时代</text>
+      <text class='text_title'>{{item.micro_name}}</text>
       <text class='text_content'>更新至44集</text>
     </view>
     <!-- 点赞和观看数 -->
@@ -46,86 +46,12 @@
       <!-- 观看数 -->
       <view class='watch_box'>
         <image src='../../static/image/watch@3x.png'></image>
-        <text>10.5W</text>
+        <text>{{item.micro_play_count}}</text>
       </view>
       <!-- 点赞数 -->
       <view class='like_box'>
         <image src='../../static/image/like@3x.png'></image>
-        <text>99.5W</text>
-      </view>
-    </view>
-  </view>
-
-  <view class='list_content_box'>
-    <!-- 微剧封面图 -->
-    <view class='list_content_box_img'>
-      <image src='../../static/image/22.png'></image>
-    </view>
-    <!-- 微剧标题和完结状态 -->
-    <view class='list_content_box_text'>
-      <text class='text_title'>我们的时代</text>
-      <text class='text_content'>更新至44集</text>
-    </view>
-    <!-- 点赞和观看数 -->
-    <view class='list_content_box_handle'>
-      <!-- 观看数 -->
-      <view class='watch_box'>
-        <image src='../../static/image/watch@3x.png'></image>
-        <text>10.5W</text>
-      </view>
-      <!-- 点赞数 -->
-      <view class='like_box'>
-        <image src='../../static/image/like@3x.png'></image>
-        <text>99.5W</text>
-      </view>
-    </view>
-  </view>
-
-  <view class='list_content_box'>
-    <!-- 微剧封面图 -->
-    <view class='list_content_box_img'>
-      <image src='../../static/image/33.png'></image>
-    </view>
-    <!-- 微剧标题和完结状态 -->
-    <view class='list_content_box_text'>
-      <text class='text_title'>我们的时代</text>
-      <text class='text_content'>更新至44集</text>
-    </view>
-    <!-- 点赞和观看数 -->
-    <view class='list_content_box_handle'>
-      <!-- 观看数 -->
-      <view class='watch_box'>
-        <image src='../../static/image/watch@3x.png'></image>
-        <text>10.5W</text>
-      </view>
-      <!-- 点赞数 -->
-      <view class='like_box'>
-        <image src='../../static/image/like@3x.png'></image>
-        <text>99.5W</text>
-      </view>
-    </view>
-  </view>
-  <view class='list_content_box'>
-    <!-- 微剧封面图 -->
-    <view class='list_content_box_img'>
-      <image src='../../static/image/44.png'></image>
-    </view>
-    <!-- 微剧标题和完结状态 -->
-    <view class='list_content_box_text'>
-      <text class='text_title'>我们的时代</text>
-      <text class='text_content'>更新至44集</text>
-    </view>
-    <!-- 点赞和观看数 -->
-    <view class='list_content_box_handle'>
-      <!-- 观看数 -->
-      <view class='watch_box'>
-        <image src='../../static/image/watch@3x.png'></image>
-        <text>10.5W</text>
-      </view>
-      <!-- 点赞数 -->
-      <view class='like_box'>
-        <image src='../../static/image/like@3x.png'></image>
-        <text>99.5W</text>
+        <text>{{item.micro_like_count}}</text>
       </view>
     </view>
   </view>

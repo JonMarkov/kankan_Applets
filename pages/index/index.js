@@ -16,9 +16,9 @@ Page({
     // 自定义标题栏的高度
     statusBarHeight: AppUrl.globalData.statusBarHeight,
     // 微剧ID
-    movieId: '47',
+    movieId: '',
     // 微剧子集ID
-    setId: '65',
+    setId: '',
     // 续集列表
     sequelList: [],
     // 观看数
@@ -54,16 +54,25 @@ Page({
    */
   onLoad: function(options) {
     var _this = this
-    // 这里要获取从上个页面传来的微剧ID和子集id
-    // 100毫秒之后执行函数（目的是等待续集ID存入data之后执行）
-    var timeOut = setTimeout(function() {
-      // 函数执行 通过微剧ID获取剧集信息（微剧播放页面）
-      _this.MicroDramaInformation()
-      // 函数执行 通过微剧ID获取微剧的介绍信息（微剧播放页面）
-      _this.MicroInfoTitle()
-      // 函数执行 通过微剧ID获取微剧的介绍信息（标题）
-      _this.MicroInfoTitleForm()
-    }, 100)
+    if (options.movieId) {
+      console.log(options.movieId)
+      // 获取上个页面获取到的微剧ID
+      var movie_Id = options.movieId
+      // 获取上个页面获取到的子集ID
+      var set_Id = options.setId
+      _this.setData({
+        movieId: movie_Id,
+        setId: set_Id
+      })
+    }
+  },
+  ma(movieId, setId) {
+    let _this = this
+    // 把微剧id和子集id放入data
+    _this.setData({
+      movieId: movieId,
+      setId: setId
+    })
   },
   // 函数定义 跳转视频列表页面
   JumpVideoList() {
@@ -77,7 +86,7 @@ Page({
     // 微剧ID
     let movieId = _this.data.movieId;
     // 微剧子集ID
-    let setId = _this.data.setId
+    let setId = _this.data.setId || ''
     let params = {
       productId: movieId
     }
@@ -92,60 +101,76 @@ Page({
       success: res => {
         // 声明返回数据
         let resData = res.data.data
-        // 声明续集列表
-        let sequelList = []
-        for (var i in resData) {
-          if (resData[i].setId == setId) {
-            // 观看数
-            if (resData[i].playCount >= 10000) {
-              // 截取保留一位小数
-              let play_count = (resData[i].playCount / 10000).toFixed(1)
-              // 最终显示形式 点赞数量拼接
-              var playCount = play_count + 'W'
-            } else {
-              var playCount = resData[i].playCount;
-            }
-            // 点赞数
-            if (resData[i].likeCount >= 10000) {
-              // 截取保留一位小数
-              let like_count = (resData[i].likeCount / 10000).toFixed(1)
-              // 最终显示形式 点赞数量拼接
-              var likeCount = like_count + 'W'
-            } else {
-              var likeCount = resData[i].likeCount;
-            }
-            // 剧集描述
-            var des = _this.DelHtmlTag(resData[i].des)
-            // 广告标题
-            var goodsName = resData[i].goodsName
-            // 视频的GCID地址
-            var moviesSetScreenList = resData[i].moviesSetScreenList[1].mp4Gcid;
-            // 当前播放续集
-            var setNum = resData[i].setNum
-          }
-          // 各个的子集ID
-          let sequel_id = resData[i].setId
-          // 各个子集的序号
-          let sequel = ++i
-          let seq_temp = {
-            sequel: sequel,
-            sequel_id: sequel_id
-          }
-          // 放入续集列表中
-          sequelList.push(seq_temp)
+        // 如果data中的子集id为空，则把微剧第一集的子集id传到data
+        if (resData != '' && setId == '') {
+          let set_id = resData[0].setId || ''
+          _this.setData({
+            setId: set_id
+          })
         }
-        // 把数据更新到data中
-        _this.setData({
-          sequelList: sequelList,
-          playCount: playCount,
-          likeCount: likeCount,
-          des: des,
-          goodsName: goodsName,
-          moviesSetScreenList: moviesSetScreenList,
-          setNum: setNum
-        })
-        // 函数执行 获取视频信息（使用GCID获取url地址）
-        _this.GcidVideoInfoList(moviesSetScreenList)
+        // 100毫秒之后执行函数（目的是等待续集ID存入data之后执行）
+        var timeOut = setTimeout(function() {
+          // 声明续集列表
+          let sequelList = []
+          for (var i in resData) {
+            if (resData[i].setId == _this.data.setId) {
+              console.log(resData[i])
+              // 观看数
+              if (resData[i].playCount >= 10000) {
+                // 截取保留一位小数
+                let play_count = (resData[i].playCount / 10000).toFixed(1)
+                // 最终显示形式 点赞数量拼接
+                var playCount = play_count + 'W'
+              } else {
+                var playCount = resData[i].playCount;
+              }
+              // 点赞数
+              if (resData[i].likeCount >= 10000) {
+                // 截取保留一位小数
+                let like_count = (resData[i].likeCount / 10000).toFixed(1)
+                // 最终显示形式 点赞数量拼接
+                var likeCount = like_count + 'W'
+              } else {
+                var likeCount = resData[i].likeCount;
+              }
+              // 剧集描述
+              var des = _this.DelHtmlTag(resData[i].des)
+              // 广告标题
+              var goodsName = resData[i].goodsName
+              // 视频的GCID地址
+              var moviesSetScreenList = resData[i].moviesSetScreenList[1].mp4Gcid;
+              // 当前播放续集
+              var setNum = resData[i].setNum
+            }
+            // 各个的子集ID
+            let sequel_id = resData[i].setId
+            // 各个子集的序号
+            let sequel = ++i
+            let seq_temp = {
+              sequel: sequel,
+              sequel_id: sequel_id
+            }
+            // 放入续集列表中
+            sequelList.push(seq_temp)
+          }
+          // 把数据更新到data中
+          _this.setData({
+            sequelList: sequelList,
+            playCount: playCount,
+            likeCount: likeCount,
+            des: des,
+            goodsName: goodsName,
+            moviesSetScreenList: moviesSetScreenList,
+            setNum: setNum
+          })
+          // 函数执行 通过微剧ID获取微剧的介绍信息（微剧播放页面）
+          _this.MicroInfoTitle()
+          // 函数执行 通过微剧ID获取微剧的介绍信息（标题）
+          _this.MicroInfoTitleForm()
+          // 函数执行 获取视频信息（使用GCID获取url地址）
+          _this.GcidVideoInfoList(moviesSetScreenList)
+        }, 100)
+
       }
     })
   },
@@ -212,6 +237,7 @@ Page({
         })
       }
     })
+
   },
   // 函数定义 切换续集
   PitchSequel(e) {
@@ -240,7 +266,7 @@ Page({
   DelHtmlTag(str) {
     return str.replace(/<[^>]+>/g, "");
   },
-  // 函数定义 获取视频信息（此处为请求接口
+  // 函数定义 获取视频信息（此处为请求接口）
   GcidVideoInfoList(res) {
     var _this = this
     let GCID = res;
@@ -257,7 +283,6 @@ Page({
         'content-type': 'application/josn'
       },
       success: res => {
-        console.log(res.data)
         let resData = res.data
         // 查找"["开始位索引
         let star_indexes = resData.indexOf("[")
@@ -279,7 +304,7 @@ Page({
         let url_resnum = resnum.substring(star_url, end_url + 3)
         // MP4完整地址
         let video_address = "http://" + Iptext + url_resnum
-        console.log(video_address)
+
         // 把视频地址放入data中
         _this.setData({
           videoAddress: video_address
@@ -320,7 +345,7 @@ Page({
       finish_state: 'display:block'
     })
   },
-  //函数定义 播放中函数，查看当前播放时间和比例 进度条
+  // 函数定义 播放中函数，查看当前播放时间和比例 进度条
   bindtimeupdate: function(res) {
     var _this = this
     // 当前视频播放时间
@@ -344,14 +369,37 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    let _this = this
+    if (_this.data.movieId == '') {
+      wx.getStorage({
+        key: 'movieId',
+        success: function(res) {
+          var movie_Id = res.data
+          var set_Id = ''
+          _this.setData({
+            movieId: movie_Id,
+            setId: set_Id
+          })
+        }
+      })
+    }
+    // 100毫秒之后执行函数（目的是等待续集ID存入data之后执行）
+    var timeOut = setTimeout(function() {
+      // 函数执行 通过微剧ID获取剧集信息（微剧播放页面）
+      _this.MicroDramaInformation()
+    }, 100)
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-
+    wx.removeStorage({
+      key: 'movieId',
+      success: function (res) {
+        console.log(res)
+      }
+    })
   },
 
   /**

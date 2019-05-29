@@ -71,6 +71,7 @@ Page({
               var encryptedData = res1.encryptedData
               var iv = res1.iv
               var params = {
+                terminal:'MINIPROVJ',
                 code: res.code,
                 nickName: e.detail.userInfo.nickName,
                 headUrl: e.detail.userInfo.avatarUrl,

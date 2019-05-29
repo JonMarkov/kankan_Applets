@@ -64,7 +64,7 @@
   <!-- 微剧续集列表 -->
   <view class='version_sequel'>
     <scroll-view scroll-x="true" class='version_sequel_roll'>
-      <view wx:for="{{sequelList}}" class="version_sequel_num {{setNum ==item.sequel?'pitch_sequel':''}}" data-pitch_sequel='{{item.sequel_id}}' bindtap='PitchSequel'>{{item.sequel}}</view>
+      <view wx:for="{{sequelList}}" class="version_sequel_num {{setNum ==item.sequel?'pitch_sequel':''}}" data-pitch_sequel='{{item.sequel_id}}' bindtap='PitchSequel' wx:key="">{{item.sequel}}</view>
     </scroll-view>
   </view>
 </view>

@@ -38,8 +38,8 @@ App({
     openid: 0,
     // 公共前缀
     // 正式域名
-    // WX_user:'https://plus-api.kankan.com',
-    // Wx_rebate:'https://rebate-api.kkstudy.cn',
+    // WX_user: 'https://plus-api.kankan.com',
+    // WX_microvision: 'https://svideo-api.kankan.com',
     // 测试域名
     WX_user: 'https://plus-api.kkstudy.cn',
     WX_microvision:'https://svideo-api.kkstudy.cn',
@@ -51,6 +51,8 @@ App({
     wx_url_3: '/author/getAuthorInfoByProductId',
     // 通过微剧id获取微剧信息(标题)
     wx_url_4: '/microvision/getMicrovisionBySetId',
+    // 微剧列表（微剧广场）
+    wx_url_5:'/microvision/getMicrovisionListForSquare'
     
   }
 })
