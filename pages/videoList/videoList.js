@@ -7,7 +7,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    default_state: true,
+    update_state: false,
+    view_state: false,
+    lises_state: false
   },
 
   /**
@@ -15,7 +18,7 @@ Page({
    */
   onLoad: function(options) {
     let _this = this;
-    // 函数执行 请求微剧列表
+    // 函数执行 请求微剧列表 第一个参数为排序类型 第二个参数为起始id 第三个参数为每页显示条数
     _this.MicroList(1, 0, 40)
   },
   // 函数定义 请求微剧列表
@@ -51,18 +54,38 @@ Page({
           // 微剧名称
           let micro_name = resData[i].name
           // 微剧观看数
-          let micro_play_count = resData[i].playCount
+          let play_count = resData[i].playCount;
+          if (play_count >= 10000) {
+            var micro_play_count = (play_count / 10000).toFixed(2) + 'W'
+          } else {
+            var micro_play_count = resData[i].playCount
+          }
           // 微剧点赞数
-          let micro_like_count = resData[i].likeCount
+          let like_count = resData[i].likeCount
+          if (like_count >= 10000) {
+            var micro_like_count = (like_count / 10000).toFixed(2) + 'W'
+          } else {
+            var micro_like_count = resData[i].likeCount
+          }
           // 微剧展示图
           let micro_screens_hot_url = resData[i].screensHotUrl
+          // 微剧更新状态
+          let update_status = resData[i].updateStatus
+          // 微剧更新集数
+          let set_num = resData[i].setNum
+          if (update_status == 0) {
+            var micro_set_num = "更新至" + set_num + "集"
+          } else if (update_status == 1) {
+            var micro_set_num = "已完结"
+          }
           // 集合得到的参数
           let temp = {
             micro_id: micro_id,
             micro_name: micro_name,
             micro_play_count: micro_play_count,
             micro_like_count: micro_like_count,
-            micro_screens_hot_url: micro_screens_hot_url
+            micro_screens_hot_url: micro_screens_hot_url,
+            micro_set_num: micro_set_num
           }
           micro_list.push(temp)
         }
@@ -82,6 +105,58 @@ Page({
     })
     wx.reLaunch({
       url: '/pages/index/index',
+    })
+  },
+  // 函数定义 点击默认排序所执行函数
+  defaultSort() {
+    let _this = this;
+    // 函数执行 请求微剧列表 第一个参数为排序类型 第二个参数为起始id 第三个参数为每页显示条数
+    _this.MicroList(1, 0, 40)
+    // 改变排序按钮箭头的状态
+    _this.setData({
+      default_state: true,
+      update_state: false,
+      view_state: false,
+      lises_state: false
+    })
+  },
+  // 函数定义 点击更新排序所执行函数
+  updateSort() {
+    let _this = this;
+    // 函数执行 请求微剧列表 第一个参数为排序类型 第二个参数为起始id 第三个参数为每页显示条数
+    _this.MicroList(2, 0, 40)
+    // 改变排序按钮箭头的状态
+    _this.setData({
+      default_state: false,
+      update_state: true,
+      view_state: false,
+      lises_state: false
+    })
+  },
+  // 函数定义 点击观看排序所执行函数
+  viewSort() {
+    let _this = this;
+    // 函数执行 请求微剧列表 第一个参数为排序类型 第二个参数为起始id 第三个参数为每页显示条数
+    _this.MicroList(3, 0, 40)
+    // 改变排序按钮箭头的状态
+    _this.setData({
+      default_state: false,
+      update_state: false,
+      view_state: true,
+      lises_state: false
+    })
+  },
+  // 函数定义 点击喜欢排序所执行函数
+  likesSort() {
+    let _this = this;
+    // 函数执行 请求微剧列表 第一个参数为排序类型 第二个参数为起始id 第三个参数为每页显示条数
+    _this.MicroList(4, 0, 40)
+    // 改变排序按钮箭头的状态
+    _this.setData({
+      default_state: false,
+      update_state: false,
+      view_state: false,
+      lises_state: true
     })
   },
   /**

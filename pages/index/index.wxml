@@ -24,7 +24,7 @@
     <!-- 微剧内容区域的左侧（广告，作者，标题，视频详细） -->
     <view class='version_content_left'>
       <!-- 广告部分 -->
-      <view class='version_content_left_commodity'>
+      <view class='version_content_left_commodity'  wx:if="{{goodsName}}">
         <view class='version_content_left_commodity_icon'>
           <image src='../../static/image/shop_cat.png'></image>
         </view>
@@ -54,6 +54,10 @@
       <view class='like_box'>
         <image src='../../static/image/like@3x.png'></image>
         <text>{{likeCount}}</text>
+      </view>
+      <!-- 转发 -->
+      <view class='share_box'>
+        <image src='../../static/image/share_icon@3x.png'></image>
       </view>
       <!-- 作者头像 -->
       <view class='headimg_box'>

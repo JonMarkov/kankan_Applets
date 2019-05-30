@@ -52,7 +52,7 @@ page {
 /* 列表小版块是否选中状态--隐藏状态 */
 
 .hide_icon {
-  display: none;
+  display: block;
 }
 
 /* H1 列表列表部分 */

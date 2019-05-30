@@ -16,9 +16,9 @@ Page({
     // 自定义标题栏的高度
     statusBarHeight: AppUrl.globalData.statusBarHeight,
     // 微剧ID
-    movieId: '133',
+    movieId: '',
     // 微剧子集ID
-    setId: '1838',
+    setId: '',
     // 续集列表
     sequelList: [],
     // 观看数
@@ -128,7 +128,7 @@ Page({
               // 剧集描述
               var des = _this.DelHtmlTag(resData[i].des)
               // 广告标题
-              var goodsName = resData[i].goodsName
+              var goodsName = resData[i].goodsName||''
               // 视频的GCID地址
               var moviesSetScreenList = resData[i].moviesSetScreenList[1].mp4Gcid;
               // 当前播放续集
@@ -306,6 +306,7 @@ Page({
   },
   // 函数定义 视频播放PLAY 暂时 需修改
   videoPlay() {
+    console.log('234')
     let _this = this
     // 创建video实例
     var videoplay = wx.createVideoContext('videoNode')
@@ -351,6 +352,10 @@ Page({
       video_cache: "100"
     })
   },
+  // 函数定义 转发给朋友
+  shareFn(){
+
+  },
   // 函数定义 用GCID请求视频
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -385,14 +390,7 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
-    wx.removeStorage({
-      key: 'movieId',
-      success: function (res) {
-        console.log(res)
-      }
-    })
-  },
+  onHide: function() {},
 
   /**
    * 生命周期函数--监听页面卸载
@@ -419,6 +417,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+      console.log('123')
   }
 })

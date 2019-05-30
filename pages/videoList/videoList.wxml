@@ -1,32 +1,35 @@
 <!-- 列表筛选部分 -->
 <view class='list_title'>
-  <view class='list_title_screen'>
+  <!-- 默认 -->
+  <view class='list_title_screen' bindtap='defaultSort'>
     <text>默认</text>
     <!-- 未选中 -->
-    <image src='../../static/image/present_0@3x.png' class='show_icon'></image>
+    <image src='../../static/image/present_0@3x.png' class='show_icon' wx:if="{{default_state == false}}"></image>
     <!-- 已选中 -->
-    <image src='../../static/image/present_1@3x.png' class='hide_icon'></image>
+    <image src='../../static/image/present_1@3x.png' class='hide_icon' wx:if="{{default_state == true}}"></image>
   </view>
-  <view class='list_title_screen left_border'>
+  <!-- 更新 -->
+  <view class='list_title_screen left_border' bindtap='updateSort'>
     <text>更新</text>
     <!-- 未选中 -->
-    <image src='../../static/image/present_0@3x.png' class='show_icon'></image>
+    <image src='../../static/image/present_0@3x.png' class='show_icon' wx:if="{{update_state == false}}"></image>
     <!-- 已选中 -->
-    <image src='../../static/image/present_1@3x.png' class='hide_icon'></image>
+    <image src='../../static/image/present_1@3x.png' class='hide_icon' wx:if="{{update_state == true}}"></image>
   </view>
-  <view class='list_title_screen left_border'>
+  <!-- 观看 -->
+  <view class='list_title_screen left_border' bindtap='viewSort'>
     <text>观看</text>
     <!-- 未选中 -->
-    <image src='../../static/image/present_0@3x.png' class='show_icon'></image>
+    <image src='../../static/image/present_0@3x.png' class='show_icon' wx:if="{{view_state == false}}"></image>
     <!-- 已选中 -->
-    <image src='../../static/image/present_1@3x.png' class='hide_icon'></image>
+    <image src='../../static/image/present_1@3x.png' class='hide_icon' wx:if="{{view_state == true}}"></image>
   </view>
-  <view class='list_title_screen left_border'>
+  <view class='list_title_screen left_border' bindtap='likesSort'>
     <text>喜欢</text>
     <!-- 未选中 -->
-    <image src='../../static/image/present_0@3x.png' class='show_icon'></image>
+    <image src='../../static/image/present_0@3x.png' class='show_icon' wx:if="{{lises_state == false}}"></image>
     <!-- 已选中 -->
-    <image src='../../static/image/present_1@3x.png' class='hide_icon'></image>
+    <image src='../../static/image/present_1@3x.png' class='hide_icon' wx:if="{{lises_state == true}}"></image>
   </view>
 </view>
 <!-- 列表内容部分 -->
@@ -39,7 +42,7 @@
     <!-- 微剧标题和完结状态 -->
     <view class='list_content_box_text'>
       <text class='text_title'>{{item.micro_name}}</text>
-      <text class='text_content'>更新至44集</text>
+      <text class='text_content'>{{item.micro_set_num}}</text>
     </view>
     <!-- 点赞和观看数 -->
     <view class='list_content_box_handle'>

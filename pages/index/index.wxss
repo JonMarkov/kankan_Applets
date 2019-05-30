@@ -47,6 +47,7 @@
   position: absolute;
   top: 50%;
   left: 48%;
+  z-index: 999
 }
 .triangle_border_right image{
 width: 100rpx;
@@ -130,7 +131,6 @@ height: 100rpx
 }
 
 /* 微剧信息部分 右侧大盒子 */
-
 /* 微剧观看次数 */
 
 .watch_box {
@@ -184,7 +184,22 @@ height: 100rpx
   height: 90rpx;
   border-radius: 50%;
 }
-
+/* 转发按钮 */
+.share_box{
+ display: flex;
+  flex-direction: column;
+  font-size: 24rpx;
+  color: #fff;
+  line-height: 30rpx;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20rpx;
+}
+.share_box image {
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 50%;
+}
 /* 微剧续集选择部分 */
 
 .version_sequel {
