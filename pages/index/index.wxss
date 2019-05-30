@@ -176,13 +176,13 @@ height: 100rpx
   line-height: 30rpx;
   justify-content: center;
   align-items: center;
-  margin-top: 20rpx;
 }
 
 .headimg_box image {
   width: 90rpx;
   height: 90rpx;
   border-radius: 50%;
+
 }
 /* 转发按钮 */
 .share_box{
@@ -199,6 +199,11 @@ height: 100rpx
   width: 90rpx;
   height: 90rpx;
   border-radius: 50%;
+  border: 0
+}
+.share_box button{
+  border: 1rpx solid rgba(0, 0, 0, 0);
+  background: rgba(0, 0, 0, 0);
 }
 /* 微剧续集选择部分 */
 
@@ -214,7 +219,7 @@ height: 100rpx
 }
 
 .version_sequel_num {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(255, 255, 255, 0.5);
   padding: 15rpx 30rpx;
   border-radius: 10rpx;
   margin-left: 3%;
@@ -224,7 +229,7 @@ height: 100rpx
   font-size: 24rpx
 }
 .pitch_sequel{
-  background: rgba(255, 0, 0, 1)
+  background: rgba(0, 0, 0, 0.3)
 }
 /* 播放和缓存的进度提 */
 
@@ -237,7 +242,7 @@ height: 100rpx
 }
 
 .bar_play {
-  background: red;
+  background: #CCAC6C;
   position: fixed;
   bottom: 10%;
   z-index: 101;

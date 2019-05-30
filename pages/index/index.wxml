@@ -5,7 +5,8 @@
 </view>
 <view class="empty_custom" style="margin-top:{{statusBarHeight}}px"></view>
 <!-- STAR  视频 STAR autoplay -->
-<video class='video_box' id='videoNode' controls="{{false}}" show-fullscreen-btn="{{false}}" show-play-btn="{{false}}" objectFit="fill" show-center-play-btn="{{false}}" src="{{videoAddress}}" bindended='bindend' bindtimeupdate="bindtimeupdate" bindtap='videoPause'/>
+<video class='video_box' id='videoNode' controls="{{false}}" show-fullscreen-btn="{{false}}" show-play-btn="{{false}}" objectFit="fill" show-center-play-btn="{{false}}" src="{{videoAddress}}" bindended='bindend' bindtimeupdate="bindtimeupdate" bindtap='videoPause'
+/>
 <!-- STAR 看看LOGO部分 -->
 <view class='logo_box'>
   <image src='../../static/image/kankan@3x.png'></image>
@@ -13,9 +14,9 @@
 <!-- STAR 播放按钮 STAR -->
 <view class='triangle_border_right'>
   <!-- 播放按钮 -->
-  <image src='../../static/image/suspend@3x.png'  bindtap="videoPlay" style='{{suspend_state}}'></image>
+  <image src='../../static/image/suspend@3x.png' bindtap="videoPlay" style='{{suspend_state}}'></image>
   <!-- 重播按钮 -->
-  <image src='../../static/image/finish@3x.png'  bindtap="videoPlay" style='{{finish_state}}'></image>
+  <image src='../../static/image/finish@3x.png' bindtap="videoPlay" style='{{finish_state}}'></image>
 </view>
 <!-- STAR 视频文本内容区域 STAR -->
 <view class='version_box'>
@@ -24,7 +25,7 @@
     <!-- 微剧内容区域的左侧（广告，作者，标题，视频详细） -->
     <view class='version_content_left'>
       <!-- 广告部分 -->
-      <view class='version_content_left_commodity'  wx:if="{{goodsName}}">
+      <view class='version_content_left_commodity' wx:if="{{goodsName}}">
         <view class='version_content_left_commodity_icon'>
           <image src='../../static/image/shop_cat.png'></image>
         </view>
@@ -51,13 +52,18 @@
         <text>{{playCount}}</text>
       </view>
       <!-- 点赞次数 -->
-      <view class='like_box'>
-        <image src='../../static/image/like@3x.png'></image>
+      <view class='like_box' bindtap='likeCountFn'>
+        <!-- 未点赞 -->
+        <image src='../../static/image/like@3x.png' wx:if="{{likeStatus == false}}"></image>
+        <!-- 已经点赞 -->
+        <image src='../../static/image/like_red_icon.png' wx:else></image>
         <text>{{likeCount}}</text>
       </view>
       <!-- 转发 -->
       <view class='share_box'>
-        <image src='../../static/image/share_icon@3x.png'></image>
+        <button open-type='share' title="点击发送给朋友" home-class='none'>
+          <image src='../../static/image/share_icon@3x.png'></image>
+        </button>
       </view>
       <!-- 作者头像 -->
       <view class='headimg_box'>

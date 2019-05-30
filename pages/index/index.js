@@ -5,6 +5,8 @@ var miniProUrl_2 = AppUrl.globalData.WX_microvision + getApp().globalData.wx_url
 var miniProUrl_3 = AppUrl.globalData.WX_microvision + getApp().globalData.wx_url_3;
 // 声明定义接口地址 通过微剧id获取微剧信息（标题）
 var miniProUrl_4 = AppUrl.globalData.WX_microvision + getApp().globalData.wx_url_4;
+// 声明定义接口 点赞功能
+var miniProUrl_6 = AppUrl.globalData.WX_microvision + getApp().globalData.wx_url_6;
 // 声明定义接口地址 通过GCID获取视频的URL播放地址
 var GcidUrl = "http://mp4.cl.kankan.com/getCdnresource_flv"
 Page({
@@ -47,6 +49,8 @@ Page({
     suspend_state: 'display:block',
     // 播放结束按钮的状态
     finish_state: 'display:none',
+    // 点赞状态
+    likeStatus: false
   },
 
   /**
@@ -65,6 +69,16 @@ Page({
         setId: set_Id
       })
     }
+    // 获取缓存 用户id数据
+    wx.getStorage({
+      key: 'userInfo',
+      success: function(res) {
+        _this.setData({
+          userInfo: res.data
+        })
+      },
+    })
+
   },
   // 函数定义 跳转视频列表页面
   JumpVideoList() {
@@ -75,11 +89,13 @@ Page({
   // 函数定义 通过微剧ID获取剧集信息（微剧播放页面）
   MicroDramaInformation() {
     let _this = this
+    let user_id = _this.data.userInfo.userId
     // 微剧ID
     let movieId = _this.data.movieId;
     // 微剧子集ID
     let setId = _this.data.setId || ''
     let params = {
+      userid: user_id,
       productId: movieId
     }
     const newparams = Object.assign(params);
@@ -128,11 +144,12 @@ Page({
               // 剧集描述
               var des = _this.DelHtmlTag(resData[i].des)
               // 广告标题
-              var goodsName = resData[i].goodsName||''
+              var goodsName = resData[i].goodsName || ''
               // 视频的GCID地址
               var moviesSetScreenList = resData[i].moviesSetScreenList[1].mp4Gcid;
               // 当前播放续集
-              var setNum = resData[i].setNum
+              var setNum = resData[i].setNum;
+              var likeStatus = resData[i].likeStatus
             }
             // 各个的子集ID
             let sequel_id = resData[i].setId
@@ -147,6 +164,7 @@ Page({
           }
           // 把数据更新到data中
           _this.setData({
+            likeStatus: likeStatus,
             sequelList: sequelList,
             playCount: playCount,
             likeCount: likeCount,
@@ -169,11 +187,13 @@ Page({
   // 函数定义 通过微剧ID获取微剧的介绍信息（微剧播放页面）
   MicroInfoTitle() {
     let _this = this
+    let user_id = _this.data.userInfo.userId
     // 微剧ID
     let movieId = _this.data.movieId;
     // 微剧子集ID
     let setId = _this.data.setId
     let params = {
+      userid: user_id,
       productId: movieId,
       setId: setId
     }
@@ -203,11 +223,13 @@ Page({
   // 函数定义 通过微剧ID获取微剧的介绍信息（标题）
   MicroInfoTitleForm() {
     let _this = this
+    let user_id = _this.data.userInfo.userId
     // 微剧ID
     let movieId = _this.data.movieId;
     // 微剧子集ID
     let setId = _this.data.setId
     let params = {
+      userid: user_id,
       setId: setId
     }
     const newparams = Object.assign(params);
@@ -352,9 +374,49 @@ Page({
       video_cache: "100"
     })
   },
-  // 函数定义 转发给朋友
-  shareFn(){
-
+  // 函数定义 点赞
+  likeCountFn() {
+    var _this = this
+    console.log(_this.data.likeStatus)
+    // 获取点赞状态
+    var like_status = _this.data.likeStatus
+    var productId = _this.data.movieId
+    var setId = _this.data.setId
+    if (like_status) {
+      var type = 0
+      _this.doLikeFn(productId, setId, type)
+      _this.setData({
+        likeStatus: false
+      })
+    } else {
+      var type = 1
+      _this.doLikeFn(productId, setId, type)
+      _this.setData({
+        likeStatus: true
+      })
+    }
+  },
+  doLikeFn(productId, setId, type) {
+    var _this = this
+    let user_id = _this.data.userInfo.userId
+    let params = {
+      userid: user_id,
+      productId: productId,
+      setId: setId,
+      type: type,
+    }
+    const newparams = Object.assign(params);
+    wx.request({
+      url: miniProUrl_6,
+      data: newparams,
+      method: "POST",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: res => {
+        console.log(res)
+      }
+    })
   },
   // 函数定义 用GCID请求视频
   /**
@@ -417,6 +479,13 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-      console.log('123')
+    let movieId = this.data.movieId;
+    let setId = this.data.setId;
+    console.log('pages/login/login?movieId=' + movieId + "&?setId=" + setId)
+    return {
+      title: '看看视频微剧场',
+      path: 'pages/login/login?movieId=' + movieId + "&?setId=" + setId,
+      imageUrl: ''
+    }
   }
 })
