@@ -8,8 +8,8 @@ Page({
   onLoad: function(options) {
     var that = this;
     // 获取URL中的参数
-    let movieId = options.movieId || '133'
-    let setId = options.setId || '1838'
+    let movieId = options.movieId || ''
+    let setId = options.setId || ''
     // 把url中的参数放入data
     that.setData({
       movieId: movieId,

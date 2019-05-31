@@ -384,18 +384,21 @@ Page({
     var setId = _this.data.setId
     if (like_status) {
       var type = 0
+      // 函数执行 取消点赞
       _this.doLikeFn(productId, setId, type)
       _this.setData({
         likeStatus: false
       })
     } else {
       var type = 1
+      // 函数执行 点赞
       _this.doLikeFn(productId, setId, type)
       _this.setData({
         likeStatus: true
       })
     }
   },
+  // 函数定义 点赞或是取消点赞执行
   doLikeFn(productId, setId, type) {
     var _this = this
     let user_id = _this.data.userInfo.userId

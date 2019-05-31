@@ -85,5 +85,6 @@
 </view>
 <!-- STAR 回复客服部分 STAR -->
 <view class='customer'>
-  <text>回复 666 看更多</text>
+  <!-- <text>回复 666 看更多</text> -->
+  <button open-type="contact">回复 666 下载</button>
 </view>

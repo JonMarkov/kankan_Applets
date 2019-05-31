@@ -202,9 +202,13 @@ height: 100rpx
   border: 0
 }
 .share_box button{
-  border: 1rpx solid rgba(0, 0, 0, 0);
+  border: 0rpx solid red;
   background: rgba(0, 0, 0, 0);
+  width: 100%
 }
+ button::after{
+border: none;
+} 
 /* 微剧续集选择部分 */
 
 .version_sequel {
@@ -262,13 +266,13 @@ height: 100rpx
   justify-content: center;
 }
 
-.customer text {
+.customer button {
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff0d2), color-stop(100%, #ffd37a));
   background: -webkit-linear-gradient(top, #fff0d2 0%, #ffd37a 100%);
   background: -o-linear-gradient(top, #fff0d2 0%, #ffd37a 100%);
   background: -ms-linear-gradient(top, #fff0d2 0%, #ffd37a 100%);
-  padding: 10rpx 50rpx;
-  border-radius: 30rpx;
+  padding: 0rpx 50rpx;
+  border-radius: 50rpx;
   font-size: 32rpx;
   color: rgba(24, 24, 24, 1);
 }

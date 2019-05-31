@@ -45,10 +45,10 @@ App({
     // 公共前缀
     // 正式域名
     // WX_user: 'https://plus-api.kankan.com',
-    // WX_microvision: 'https://svideo-api.kankan.com',
+    WX_microvision: 'https://svideo-api.kankan.com',
     // 测试域名
     WX_user: 'https://plus-api.kkstudy.cn',
-    WX_microvision:'https://svideo-api.kkstudy.cn',
+    // WX_microvision:'https://svideo-api.kkstudy.cn',
     // 登陆授权接口
     wx_url_1: '/user/login/miniProEncrypt',
     // 通过微剧id获取剧集信息（微剧播放页面）
