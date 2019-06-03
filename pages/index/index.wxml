@@ -19,7 +19,7 @@
   <image src='../../static/image/finish@3x.png' bindtap="videoPlay" style='{{finish_state}}'></image>
 </view>
 <!-- STAR 视频文本内容区域 STAR -->
-<view class='version_box'>
+<view class='version_box' bindtap='videoPause'>
   <!-- 微剧的内容区域 -->
   <view class='version_content'>
     <!-- 微剧内容区域的左侧（广告，作者，标题，视频详细） -->
@@ -52,7 +52,7 @@
         <text>{{playCount}}</text>
       </view>
       <!-- 点赞次数 -->
-      <view class='like_box' bindtap='likeCountFn'>
+      <view class='like_box' catchtap='likeCountFn'>
         <!-- 未点赞 -->
         <image src='../../static/image/like@3x.png' wx:if="{{likeStatus == false}}"></image>
         <!-- 已经点赞 -->
@@ -74,7 +74,7 @@
   <!-- 微剧续集列表 -->
   <view class='version_sequel'>
     <scroll-view scroll-x="true" class='version_sequel_roll'>
-      <view wx:for="{{sequelList}}" class="version_sequel_num {{setNum ==item.sequel?'pitch_sequel':''}}" data-pitch_sequel='{{item.sequel_id}}' bindtap='PitchSequel' wx:key="">{{item.sequel}}</view>
+      <view wx:for="{{sequelList}}" class="version_sequel_num {{setNum ==item.sequel?'pitch_sequel':''}}" data-pitch_sequel='{{item.sequel_id}}' catchtap='PitchSequel' wx:key="">{{item.sequel}}</view>
     </scroll-view>
   </view>
 </view>
