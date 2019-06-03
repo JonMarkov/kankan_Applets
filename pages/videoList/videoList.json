@@ -1,5 +1,6 @@
 {
   "usingComponents": {},
   "navigationBarTitleText": "微剧广场",
-  "navigationBarTextStyle": "black"
+  "navigationBarTextStyle": "white",
+  "backgroundColor": "#000"
 }

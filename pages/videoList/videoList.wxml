@@ -2,30 +2,30 @@
 <view class='list_title'>
   <!-- 默认 -->
   <view class='list_title_screen' bindtap='defaultSort'>
-    <text>默认</text>
+    <text style="{{default_state == false?'opacity:0.5':'opacity:1'}}">默认</text>
     <!-- 未选中 -->
     <image src='../../static/image/present_0@3x.png' class='show_icon' wx:if="{{default_state == false}}"></image>
     <!-- 已选中 -->
     <image src='../../static/image/present_1@3x.png' class='hide_icon' wx:if="{{default_state == true}}"></image>
   </view>
   <!-- 更新 -->
-  <view class='list_title_screen left_border' bindtap='updateSort'>
-    <text>更新</text>
+  <view class='list_title_screen' bindtap='updateSort'>
+    <text style="{{update_state == false?'opacity:0.5':'opacity:1'}}">更新</text>
     <!-- 未选中 -->
     <image src='../../static/image/present_0@3x.png' class='show_icon' wx:if="{{update_state == false}}"></image>
     <!-- 已选中 -->
     <image src='../../static/image/present_1@3x.png' class='hide_icon' wx:if="{{update_state == true}}"></image>
   </view>
   <!-- 观看 -->
-  <view class='list_title_screen left_border' bindtap='viewSort'>
-    <text>观看</text>
+  <view class='list_title_screen' bindtap='viewSort'>
+    <text style="{{view_state == false?'opacity:0.5':'opacity:1'}}">观看</text>
     <!-- 未选中 -->
     <image src='../../static/image/present_0@3x.png' class='show_icon' wx:if="{{view_state == false}}"></image>
     <!-- 已选中 -->
     <image src='../../static/image/present_1@3x.png' class='hide_icon' wx:if="{{view_state == true}}"></image>
   </view>
-  <view class='list_title_screen left_border' bindtap='likesSort'>
-    <text>喜欢</text>
+  <view class='list_title_screen' bindtap='likesSort'>
+    <text style="{{lises_state == false?'opacity:0.5':'opacity:1'}}">喜欢</text>
     <!-- 未选中 -->
     <image src='../../static/image/present_0@3x.png' class='show_icon' wx:if="{{lises_state == false}}"></image>
     <!-- 已选中 -->

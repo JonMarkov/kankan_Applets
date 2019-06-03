@@ -1,5 +1,5 @@
 page {
-  background: #121212;
+  background: #010101;
 }
 
 /* H1 列表筛选部分 */
@@ -7,23 +7,25 @@ page {
 .list_title {
   display: flex;
   flex-direction: row;
+  justify-content: space-between
 }
 
 /* 列表筛选小板块内容 */
 
 .list_title_screen {
-  width: 25%;
+  width: 24.8%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 20rpx 0px;
+  background: #121212
 }
 
 /* 列表小版块边框 */
 
 .left_border {
-  border-left: 1rpx solid #fff;
+  border-left: 2rpx solid #1d1c1c;
 }
 
 /* 列表小版块标题 */

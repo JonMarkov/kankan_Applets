@@ -59,7 +59,6 @@ Page({
   onLoad: function(options) {
     var _this = this
     if (options.movieId) {
-      console.log(options.movieId)
       // 获取上个页面获取到的微剧ID
       var movie_Id = options.movieId
       // 获取上个页面获取到的子集ID
@@ -122,7 +121,6 @@ Page({
           let sequelList = []
           for (var i in resData) {
             if (resData[i].setId == _this.data.setId) {
-              console.log(resData[i])
               // 观看数
               if (resData[i].playCount >= 10000) {
                 // 截取保留一位小数
@@ -179,7 +177,7 @@ Page({
           _this.MicroInfoTitleForm()
           // 函数执行 获取视频信息（使用GCID获取url地址）
           _this.GcidVideoInfoList(moviesSetScreenList)
-        }, 100)
+        }, 50)
 
       }
     })
@@ -274,7 +272,7 @@ Page({
       _this.MicroInfoTitle()
       // 函数执行 通过微剧ID获取微剧的介绍信息（标题）
       _this.MicroInfoTitleForm()
-    }, 100)
+    }, 50)
   },
   // 函数定义，去除 HTML标签
   DelHtmlTag(str) {
@@ -328,7 +326,6 @@ Page({
   },
   // 函数定义 视频播放PLAY 暂时 需修改
   videoPlay() {
-    console.log('234')
     let _this = this
     // 创建video实例
     var videoplay = wx.createVideoContext('videoNode')
@@ -362,22 +359,24 @@ Page({
   },
   // 函数定义 播放中函数，查看当前播放时间和比例 进度条
   bindtimeupdate: function(res) {
-    var _this = this
-    // 当前视频播放时间
-    let videoPlay = res.detail.currentTime
-    // 视频总时长
-    let inner_time = res.detail.duration
-    // 当前播放占全部时长的比例
-    let video_ratio = (videoPlay / inner_time) * 100
-    this.setData({
-      video_play: video_ratio,
-      video_cache: "100"
-    })
+    if (res == undefined){}else{
+      var _this = this
+      // 当前视频播放时间
+      let videoPlay = res.detail.currentTime
+      // 视频总时长
+      let inner_time = res.detail.duration
+      // 当前播放占全部时长的比例
+      let video_ratio = (videoPlay / inner_time) * 100
+      this.setData({
+        video_play: video_ratio,
+        video_cache: "100"
+      })
+    }
+
   },
   // 函数定义 点赞
   likeCountFn() {
     var _this = this
-    console.log(_this.data.likeStatus)
     // 获取点赞状态
     var like_status = _this.data.likeStatus
     var productId = _this.data.movieId
@@ -449,7 +448,7 @@ Page({
     var timeOut = setTimeout(function() {
       // 函数执行 通过微剧ID获取剧集信息（微剧播放页面）
       _this.MicroDramaInformation()
-    }, 100)
+    }, 50)
   },
 
   /**
