@@ -60,7 +60,11 @@ App({
     // 微剧列表（微剧广场）
     wx_url_5: '/microvision/getMicrovisionListForSquare',
     // 点赞接口
-    wx_url_6:'/microvision/doLike'
+    wx_url_6:'/microvision/doLike',
+    // 分享文案的图片
+    wx_url_7: '/microvision/getShareParas',
+    // 获取分享文案的描述
+    wx_url_8: '/microvision/getShareParas'
 
   }
 })

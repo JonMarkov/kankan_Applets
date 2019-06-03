@@ -46,7 +46,6 @@ Page({
       success: res => {
         // 声明返回数据
         let resData = res.data.data
-        console.log(resData)
         let micro_list = []
         for (let i in resData) {
           // 微剧ID

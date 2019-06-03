@@ -7,6 +7,8 @@ var miniProUrl_3 = AppUrl.globalData.WX_microvision + getApp().globalData.wx_url
 var miniProUrl_4 = AppUrl.globalData.WX_microvision + getApp().globalData.wx_url_4;
 // 声明定义接口 点赞功能
 var miniProUrl_6 = AppUrl.globalData.WX_microvision + getApp().globalData.wx_url_6;
+// 声明定义接口 分享所需要的数据
+var miniProUrl_7 = AppUrl.globalData.WX_microvision + getApp().globalData.wx_url_7;
 // 声明定义接口地址 通过GCID获取视频的URL播放地址
 var GcidUrl = "http://mp4.cl.kankan.com/getCdnresource_flv"
 Page({
@@ -46,7 +48,7 @@ Page({
     // 播放进度
     video_play: '0',
     // 播放按钮的状态
-    suspend_state: 'display:block',
+    suspend_state: 'display:none',
     // 播放结束按钮的状态
     finish_state: 'display:none',
     // 点赞状态
@@ -177,6 +179,8 @@ Page({
           _this.MicroInfoTitleForm()
           // 函数执行 获取视频信息（使用GCID获取url地址）
           _this.GcidVideoInfoList(moviesSetScreenList)
+          //函数执行 调用分享需要的接口
+          _this.GetShareParas()
         }, 50)
 
       }
@@ -260,7 +264,7 @@ Page({
     _this.setData({
       setId: setId,
       // 播放按钮的状态
-      suspend_state: 'display:block',
+      suspend_state: 'display:none',
       // 播放结束按钮的状态
       finish_state: 'display:none',
     });
@@ -278,7 +282,7 @@ Page({
   DelHtmlTag(str) {
     return str.replace(/<[^>]+>/g, "");
   },
-  // 函数定义 获取视频信息（此处为请求接口）
+  // 函数定义 获取视频信息，GCID（此处为请求接口）
   GcidVideoInfoList(res) {
     var _this = this
     let GCID = res;
@@ -359,7 +363,7 @@ Page({
   },
   // 函数定义 播放中函数，查看当前播放时间和比例 进度条
   bindtimeupdate: function(res) {
-    if (res == undefined){}else{
+    if (res == undefined) {} else {
       var _this = this
       // 当前视频播放时间
       let videoPlay = res.detail.currentTime
@@ -420,11 +424,46 @@ Page({
       }
     })
   },
-  // 函数定义 用GCID请求视频
+  // 函数定义 分享需要的信息
+  GetShareParas() {
+    var _this = this
+    let user_id = _this.data.userInfo.userId
+    let productId = _this.data.movieId
+    let setId = _this.data.setId
+
+    let params = {
+      userid: user_id,
+      productId: productId,
+      setId: setId,
+    }
+    const newparams = Object.assign(params);
+    wx.request({
+      url: miniProUrl_7,
+      data: newparams,
+      method: "GET",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: res => {
+        // 分享所需标题
+        let share_title = res.data.data.title
+        // 分享所需描述
+        let share_des = res.data.data.des;
+        // 分享所需图片
+        let share_img = res.data.data.friendsSharePic
+        _this.setData({
+          share_des: share_des,
+          share_img: share_img
+        })
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {},
+  onReady: function() {
+  },
 
   /**
    * 生命周期函数--监听页面显示
@@ -448,13 +487,16 @@ Page({
     var timeOut = setTimeout(function() {
       // 函数执行 通过微剧ID获取剧集信息（微剧播放页面）
       _this.MicroDramaInformation()
+
     }, 50)
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {},
+  onHide: function() {
+
+  },
 
   /**
    * 生命周期函数--监听页面卸载
@@ -474,20 +516,21 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-
+    console.log('触底')
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
+    let share_des = this.data.share_des
+    let share_img = this.data.share_img
     let movieId = this.data.movieId;
     let setId = this.data.setId;
-    console.log('pages/login/login?movieId=' + movieId + "&?setId=" + setId)
     return {
-      title: '看看视频微剧场',
+      title: share_des,
       path: 'pages/login/login?movieId=' + movieId + "&?setId=" + setId,
-      imageUrl: ''
+      imageUrl: share_img
     }
   }
 })
