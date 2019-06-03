@@ -6,6 +6,9 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   onLoad: function(options) {
+    console.log('1')
+    console.log(options)
+    console.log('2')
     var that = this;
     // 获取URL中的参数
     let movieId = options.movieId || ''

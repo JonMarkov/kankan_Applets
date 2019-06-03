@@ -1,3 +1,4 @@
+// 声明全局
 var AppUrl = getApp();
 // 声明定义接口地址 通过微剧ID获取剧集信息（微剧播放页面）
 var miniProUrl_2 = AppUrl.globalData.WX_microvision + getApp().globalData.wx_url_2;
@@ -346,13 +347,16 @@ Page({
   // 函数定义  暂停播放
   videoPause() {
     let _this = this
-    // 创建video实例
-    var videoplay = wx.createVideoContext('videoNode')
-    // 使视频暂停
-    videoplay.pause()
-    _this.setData({
-      suspend_state: 'display:block',
-    })
+    let video_play = _this.data.video_play
+    if (video_play >100){
+      // 创建video实例
+      var videoplay = wx.createVideoContext('videoNode')
+      // 使视频暂停
+      videoplay.pause()
+      _this.setData({
+        suspend_state: 'display:block',
+      })
+    }
   },
   // 函数定义 播放结束
   bindend: function() {
@@ -527,9 +531,10 @@ Page({
     let share_img = this.data.share_img
     let movieId = this.data.movieId;
     let setId = this.data.setId;
+    let path = 'pages/login/login?movieId=' + movieId + "&setId=" + setId
     return {
       title: share_des,
-      path: 'pages/login/login?movieId=' + movieId + "&?setId=" + setId,
+      path: path,
       imageUrl: share_img
     }
   }
