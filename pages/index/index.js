@@ -214,7 +214,7 @@ Page({
         // 发布者头像
         let headPic = resData.headPic
         // 发布者昵称
-        let nickName = resData.nickName
+        let nickName = "@" + resData.nickName
         // 把数据存入data
         _this.setData({
           headPic: headPic,

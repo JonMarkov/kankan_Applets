@@ -37,7 +37,7 @@
       </view>
       <!-- 微剧的作者昵称 -->
       <view class='version_content_left_name'>
-        <text>@{{nickName}}</text>
+        <text>{{nickName}}</text>
       </view>
       <!-- 微剧的剧集介绍 -->
       <view class='version_content_left_detail'>
