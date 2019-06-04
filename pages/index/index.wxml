@@ -73,9 +73,12 @@
   </view>
   <!-- 微剧续集列表 -->
   <view class='version_sequel'>
-    <scroll-view scroll-x="true" class='version_sequel_roll'>
-      <view wx:for="{{sequelList}}" class="version_sequel_num {{setNum ==item.sequel?'pitch_sequel':''}}" data-pitch_sequel='{{item.sequel_id}}' catchtap='PitchSequel' wx:key="">{{item.sequel}}</view>
+    <scroll-view scroll-x="true" class='version_sequel_roll' scroll-left="{{scrollLeft}}">
+     <block wx:for="{{sequelList}}" wx:key="{{index}}">
+      <view class="version_sequel_num {{setNum ==item.sequel?'pitch_sequel':''}}" data-pitch_sequel='{{item.sequel_id}}' catchtap='PitchSequel'>{{item.sequel}}</view>
+       </block>
     </scroll-view>
+
   </view>
 </view>
 <!-- STAR 进度条 STAR-->

@@ -25,7 +25,7 @@
     <image src='../../static/image/present_1@3x.png' class='hide_icon' wx:if="{{view_state == true}}"></image>
   </view>
   <view class='list_title_screen' bindtap='likesSort'>
-    <text style="{{lises_state == false?'opacity:0.5':'opacity:1'}}">喜欢</text>
+    <text style="{{lises_state == false?'opacity:0.5':'opacity:1'}}">点赞</text>
     <!-- 未选中 -->
     <image src='../../static/image/present_0@3x.png' class='show_icon' wx:if="{{lises_state == false}}"></image>
     <!-- 已选中 -->

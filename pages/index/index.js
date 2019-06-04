@@ -53,7 +53,9 @@ Page({
     // 播放结束按钮的状态
     finish_state: 'display:none',
     // 点赞状态
-    likeStatus: false
+    likeStatus: false,
+    // 滚动条当前偏移位置
+    scrollLeft: ''
   },
 
   /**
@@ -182,6 +184,8 @@ Page({
           _this.GcidVideoInfoList(moviesSetScreenList)
           //函数执行 调用分享需要的接口
           _this.GetShareParas()
+          // 定位滚动条位置
+          _this.OnScroll()
         }, 50)
 
       }
@@ -277,6 +281,8 @@ Page({
       _this.MicroInfoTitle()
       // 函数执行 通过微剧ID获取微剧的介绍信息（标题）
       _this.MicroInfoTitleForm()
+      // 定位滚动条位置
+      _this.OnScroll()
     }, 50)
   },
   // 函数定义，去除 HTML标签
@@ -348,7 +354,7 @@ Page({
   videoPause() {
     let _this = this
     let video_play = _this.data.video_play
-    if (video_play >100){
+    if (video_play > 100) {
       // 创建video实例
       var videoplay = wx.createVideoContext('videoNode')
       // 使视频暂停
@@ -463,11 +469,29 @@ Page({
     })
   },
 
+  OnScroll() {
+    let _this = this
+    let deviceWidth = wx.getSystemInfoSync().windowWidth
+    console.log(deviceWidth)
+    // 当前播放集数
+    let set_num = _this.data.setNum
+    if (set_num < 8) {
+      var scrollLeft = set_num * 0
+    } else if (set_num < 10) {
+      var scrollLeft = set_num * 45
+    } else {
+      var scrollLeft = set_num * 48
+    }
+    // 把数据存入data
+    _this.setData({
+      scrollLeft: scrollLeft
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
-  },
+  onReady: function() {},
 
   /**
    * 生命周期函数--监听页面显示
@@ -487,6 +511,7 @@ Page({
         }
       })
     }
+
     // 100毫秒之后执行函数（目的是等待续集ID存入data之后执行）
     var timeOut = setTimeout(function() {
       // 函数执行 通过微剧ID获取剧集信息（微剧播放页面）
