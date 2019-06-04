@@ -354,7 +354,7 @@ Page({
   videoPause() {
     let _this = this
     let video_play = _this.data.video_play
-    if (video_play > 100) {
+    if (video_play > 1) {
       // 创建video实例
       var videoplay = wx.createVideoContext('videoNode')
       // 使视频暂停
