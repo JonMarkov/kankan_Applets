@@ -1,3 +1,6 @@
+page{
+  background: #000
+}
 /* 自定义状态栏部分 */
 
 .custom {

@@ -13,10 +13,7 @@ var miniProUrl_7 = AppUrl.globalData.WX_microvision + getApp().globalData.wx_url
 // 声明定义接口地址 通过GCID获取视频的URL播放地址
 var GcidUrl = "http://mp4.cl.kankan.com/getCdnresource_flv"
 Page({
-
-  /**
-   * 页面的初始数据
-   */
+  // 数据DATA 页面的初始数据
   data: {
     // 自定义标题栏的高度
     statusBarHeight: AppUrl.globalData.statusBarHeight,
@@ -57,10 +54,7 @@ Page({
     // 滚动条当前偏移位置
     scrollLeft: ''
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  // 内置函数 生命周期函数--监听页面加载
   onLoad: function(options) {
     var _this = this
     if (options.movieId) {
@@ -427,10 +421,13 @@ Page({
       data: newparams,
       method: "POST",
       header: {
-        'content-type': 'application/x-www-form-urlencoded'
+        'content-type': 'application/x-www-form-urlencoded',
+        'ticket': _this.data.userInfo.ticket,
       },
       success: res => {
-        console.log(res)
+        _this.setData({
+          likeCount: res.data.data.likeCount
+        })
       }
     })
   },
@@ -468,7 +465,7 @@ Page({
       }
     })
   },
-
+  // 函数定义 定位滚动条位置
   OnScroll() {
     let _this = this
     let deviceWidth = wx.getSystemInfoSync().windowWidth
@@ -487,15 +484,10 @@ Page({
       scrollLeft: scrollLeft
     })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {},
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
+  // 内置函数 生命周期函数--监听页面初次渲染完成
+  onReady: function() {
+  },
+  // 内置函数 生命周期函数--监听页面显示
   onShow: function() {
     let _this = this
     if (_this.data.movieId == '') {
@@ -519,43 +511,29 @@ Page({
 
     }, 50)
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
+  // 内置函数 生命周期函数--监听页面隐藏
+  onHide: function() {},
+  // 内置函数 生命周期函数--监听页面卸载
   onUnload: function() {
-
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
+  // 内置函数 页面相关事件处理函数--监听用户下拉动作
   onPullDownRefresh: function() {
-
   },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
+  // 内置函数 页面上拉触底事件的处理函数
   onReachBottom: function() {
     console.log('触底')
   },
-
-  /**
-   * 用户点击右上角分享
-   */
+  // 内置函数 用户点击右上角分享
   onShareAppMessage: function() {
+    // 分享描述
     let share_des = this.data.share_des
+    // 分享的图片
     let share_img = this.data.share_img
+    // 分享的本剧的微剧集ID
     let movieId = this.data.movieId;
+    // 分享的本剧的子集ID
     let setId = this.data.setId;
+    // 分享的URL路径
     let path = 'pages/login/login?movieId=' + movieId + "&setId=" + setId
     return {
       title: share_des,

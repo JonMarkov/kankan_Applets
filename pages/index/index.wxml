@@ -5,8 +5,8 @@
 </view>
 <view class="empty_custom" style="padding-top:{{statusBarHeight}}px"></view>
 <!-- STAR  视频 STAR autoplay -->
-<video class='video_box' autoplay id='videoNode' controls="{{false}}" show-fullscreen-btn="{{false}}" show-play-btn="{{false}}" objectFit="fill" show-center-play-btn="{{false}}" src="{{videoAddress}}" bindended='bindend' bindtimeupdate="bindtimeupdate" bindtap='videoPause'
-/>
+<video class='video_box' autoplay id='videoNode' controls="{{false}}" show-fullscreen-btn="{{false}}" show-play-btn="{{false}}" objectFit="fill" show-center-play-btn="{{false}}" src="{{videoAddress}}" bindended='bindend' bindtimeupdate="bindtimeupdate"
+  bindtap='videoPause' />
 <!-- STAR 看看LOGO部分 -->
 <view class='logo_box'>
   <image src='../../static/image/kankan@3x.png'></image>
@@ -25,12 +25,12 @@
     <!-- 微剧内容区域的左侧（广告，作者，标题，视频详细） -->
     <view class='version_content_left'>
       <!-- 广告部分 -->
-      <view class='version_content_left_commodity' wx:if="{{goodsName}}">
+      <!-- <view class='version_content_left_commodity' wx:if="{{goodsName}}">
         <view class='version_content_left_commodity_icon'>
           <image src='../../static/image/shop_cat.png'></image>
         </view>
         <view class='version_content_left_commodity_text'>{{goodsName}}</view>
-      </view>
+      </view> -->
       <!-- 微剧的标题 -->
       <view class='version_content_left_title'>
         <text>{{Name}}</text>
@@ -74,9 +74,9 @@
   <!-- 微剧续集列表 -->
   <view class='version_sequel'>
     <scroll-view scroll-x="true" class='version_sequel_roll' scroll-left="{{scrollLeft}}">
-     <block wx:for="{{sequelList}}" wx:key="{{index}}">
-      <view class="version_sequel_num {{setNum ==item.sequel?'pitch_sequel':''}}" data-pitch_sequel='{{item.sequel_id}}' catchtap='PitchSequel'>{{item.sequel}}</view>
-       </block>
+      <block wx:for="{{sequelList}}" wx:key="{{index}}">
+        <view class="version_sequel_num {{setNum ==item.sequel?'pitch_sequel':''}}" data-pitch_sequel='{{item.sequel_id}}' catchtap='PitchSequel'>{{item.sequel}}</view>
+      </block>
     </scroll-view>
 
   </view>
