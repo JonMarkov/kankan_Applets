@@ -52,7 +52,11 @@ Page({
     // 点赞状态
     likeStatus: false,
     // 滚动条当前偏移位置
-    scrollLeft: ''
+    scrollLeft: '',
+    // 滑动开始的距离
+    touchStartingY:'',
+    // 滑动进行中距离
+    touchMoveingY:''
   },
   // 内置函数 生命周期函数--监听页面加载
   onLoad: function(options) {
@@ -102,7 +106,9 @@ Page({
       data: newparams,
       method: "GET",
       header: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'ticket': _this.data.userInfo.ticket,
+        'terminal': 'MINIPROVJ'
       },
       success: res => {
         // 声明返回数据
@@ -204,7 +210,9 @@ Page({
       data: newparams,
       method: "GET",
       header: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'ticket': _this.data.userInfo.ticket,
+        'terminal': 'MINIPROVJ'
       },
       success: res => {
         // 声明返回数据
@@ -239,7 +247,9 @@ Page({
       data: newparams,
       method: "GET",
       header: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'ticket': _this.data.userInfo.ticket,
+        'terminal': 'MINIPROVJ'
       },
       success: res => {
         // 声明返回数据
@@ -297,7 +307,9 @@ Page({
       data: newparams,
       method: "GET",
       header: {
-        'content-type': 'application/josn'
+        'content-type': 'application/josn',
+        'ticket': _this.data.userInfo.ticket,
+        'terminal': 'MINIPROVJ'
       },
       success: res => {
         let resData = res.data
@@ -423,6 +435,7 @@ Page({
       header: {
         'content-type': 'application/x-www-form-urlencoded',
         'ticket': _this.data.userInfo.ticket,
+        'terminal':'MINIPROVJ'
       },
       success: res => {
         _this.setData({
@@ -449,7 +462,9 @@ Page({
       data: newparams,
       method: "GET",
       header: {
-        'content-type': 'application/x-www-form-urlencoded'
+        'content-type': 'application/x-www-form-urlencoded',
+        'ticket': _this.data.userInfo.ticket,
+        'terminal': 'MINIPROVJ'
       },
       success: res => {
         // 分享所需标题
@@ -483,6 +498,98 @@ Page({
     _this.setData({
       scrollLeft: scrollLeft
     })
+  },
+  // 滑动开始
+  touchStart(e) {
+    console.log('开始')
+    console.log(e)
+    let _this = this;
+    let touchStartingY = e.touches[0].clientY
+    this.setData({
+      touchStartingY: touchStartingY
+    })
+  },
+  // 滑动进行
+  touchMove(e) {
+    console.log('进行')
+      console.log(e)
+    let _this = this;
+    let touchMoveingY = e.touches[0].clientY
+    this.setData({
+      touchMoveingY: touchMoveingY
+    })
+  },
+  // 滑动结束
+  touchEnd(e) {
+    console.log('结束')
+    console.log(e)
+    let _this =this
+    // 开始
+    let touchStartingY = _this.data.touchStartingY
+    // 结束
+    let touchMoveingY = _this.data.touchMoveingY
+    if (touchStartingY > touchMoveingY){
+      console.log('向上')
+    }
+    if (touchStartingY < touchMoveingY){
+      console.log('向下')
+    }
+
+  },
+
+
+  touchEndHandler(e) {
+    let touchStartingY = this.data.touchStartingY
+    console.log(touchStartingY)
+    console.log(e.changedTouches[0].clientY)
+    let deltaY = e.changedTouches[0].clientY - touchStartingY
+    console.log('deltaY ', deltaY)
+
+    let index = this.data.videoIndex
+    console.log(index, 'indexindexindexindex')
+    if (deltaY > 100 && index !== 0) {
+      // 更早地设置 animationShow
+      this.setData({
+        animationShow: true
+      }, () => {
+        console.log('-1 切换')
+        this.data.commentList = [] //滑动上一个视频清除评论列表
+        this.createAnimation(-1, index).then((res) => {
+          console.log(res)
+          this.setData({
+            animation: this.animation.export(),
+            videoIndex: res.index,
+            currentTranslateY: res.currentTranslateY,
+            percent: 1
+          }, () => {
+            event.emit('updateVideoIndex', res.index)
+          })
+        })
+      })
+    } else if (deltaY < -100 && index !== (this.data.videos.length - 1)) {
+      this.setData({
+        animationShow: true
+      }, () => {
+        console.log('+1 切换')
+        console.log(index)
+        this.data.commentList = [] //滑动下一个视频清除评论列表
+        this.createAnimation(1, index).then((res) => {
+          this.setData({
+            animation: this.animation.export(),
+            videoIndex: res.index,
+            currentTranslateY: res.currentTranslateY,
+            percent: 1
+          }, () => {
+            event.emit('updateVideoIndex', res.index)
+          })
+        })
+      })
+    }
+  },
+
+  touchCancel(e) {
+    console.log('------touchCancel------')
+    console.log(e)
   },
   // 内置函数 生命周期函数--监听页面初次渲染完成
   onReady: function() {

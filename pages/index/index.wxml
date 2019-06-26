@@ -6,7 +6,7 @@
 <view class="empty_custom" style="padding-top:{{statusBarHeight}}px"></view>
 <!-- STAR  视频 STAR autoplay -->
 <video class='video_box' autoplay id='videoNode' controls="{{false}}" show-fullscreen-btn="{{false}}" show-play-btn="{{false}}" objectFit="fill" show-center-play-btn="{{false}}" src="{{videoAddress}}" bindended='bindend' bindtimeupdate="bindtimeupdate"
-  bindtap='videoPause' />
+  bindtap='videoPause' bindtouchstart="touchStart" bindtouchmove='touchMove' bindtouchend='touchEnd' />
 <!-- STAR 看看LOGO部分 -->
 <view class='logo_box'>
   <image src='../../static/image/kankan@3x.png'></image>

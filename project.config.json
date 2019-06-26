@@ -15,7 +15,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.7.0",
 	"appid": "wx85b4ce32d2b60098",
-	"projectname": "kankan_Applets",
+	"projectname": "kankan_Applet",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
