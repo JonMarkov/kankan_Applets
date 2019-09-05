@@ -10,6 +10,8 @@ var miniProUrl_4 = AppUrl.globalData.WX_microvision + getApp().globalData.wx_url
 var miniProUrl_6 = AppUrl.globalData.WX_microvision + getApp().globalData.wx_url_6;
 // 声明定义接口 分享所需要的数据
 var miniProUrl_7 = AppUrl.globalData.WX_microvision + getApp().globalData.wx_url_7;
+// 声明定义接口 分享所需要的数据
+var miniProUrl_9 = AppUrl.globalData.WX_microvision + getApp().globalData.wx_url_9;
 // 声明定义接口地址 通过GCID获取视频的URL播放地址
 var GcidUrl = "http://mp4.cl.kankan.com/getCdnresource_flv"
 Page({
@@ -296,14 +298,18 @@ Page({
   // 函数定义 获取视频信息，GCID（此处为请求接口）
   GcidVideoInfoList(res) {
     var _this = this
-    let GCID = res;
+    let user_id = _this.data.userInfo.userId
+    let productId = _this.data.movieId
+    let setId = _this.data.setId
+
     let params = {
-      gcid: GCID,
-      bid: 21
+      userid: user_id,
+      movieId: productId,
+      movieSetId: setId,
     }
     const newparams = Object.assign(params);
     wx.request({
-      url: GcidUrl,
+      url: miniProUrl_9,
       data: newparams,
       method: "GET",
       header: {
@@ -312,31 +318,10 @@ Page({
         'terminal': 'MINIPROVJ'
       },
       success: res => {
-        let resData = res.data
-        // 查找"["开始位索引
-        let star_indexes = resData.indexOf("[")
-        // 查找"]"结束位索引
-        let end_indexes = resData.indexOf("]")
-        // 获取"[]"中的内容
-        let resnum = resData.substring(star_indexes, end_indexes)
-        // 获取IP地址的正则表达式
-        var ip = /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/;
-        // MP4的Ip地址
-        var Iptext = ip.exec(resnum)[0];
-        // MP4的端口号
-        var port = "8080"
-        // URL路径开始位索引
-        let star_url = resnum.indexOf("/")
-        // URL路径结束位索引
-        let end_url = resnum.indexOf("mp4")
-        // MP4的Url路径内容
-        let url_resnum = resnum.substring(star_url, end_url + 3)
-        // MP4完整地址
-        let video_address = "http://" + Iptext + url_resnum
-
         // 把视频地址放入data中
+        console.log(res)
         _this.setData({
-          videoAddress: video_address
+          videoAddress: res.data.data
         })
       }
     })

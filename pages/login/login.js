@@ -34,6 +34,7 @@ Page({
   AlreadyGrant: function(callback, days) {
     var that = this;
     // 查看是否授权
+    
     wx.getSetting({
       success: function(res) {
         console.log(res)
@@ -132,6 +133,7 @@ Page({
           })
         }
       });
+      
 
     } else {
       //用户按了拒绝按钮

@@ -64,7 +64,9 @@ App({
     // 分享文案的图片
     wx_url_7: '/microvision/getShareParas',
     // 获取分享文案的描述
-    wx_url_8: '/microvision/getShareParas'
+    wx_url_8: '/microvision/getShareParas',
+    // 获取视频地址
+    wx_url_9: '/microvision/getMovieSetPlayUrl'
 
   }
 })
